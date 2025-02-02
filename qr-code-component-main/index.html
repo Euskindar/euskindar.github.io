@@ -1,0 +1,104 @@
+<!--
+  This HTML document represents a QR code component challenge from Frontend Mentor.
+  It displays a QR code image along with descriptive text and attribution information.
+
+  Structure:
+  - Head: Contains metadata, viewport settings, favicon, title, and external resources.
+    - Metadata: Charset and viewport settings for proper rendering across devices.
+    - External Resources: CSS stylesheet, Google Fonts, and favicon.
+  - Body: Consists of a main section with the QR code and description, and a footer with attribution.
+
+  Main components:
+  - QR code container: Holds the QR code image and descriptive text.
+    - QR code image: Displayed using an <img> tag with alt text for accessibility.
+    - Description: Two paragraphs explaining the purpose of the QR code.
+  - Attribution footer: Provides credit to Frontend Mentor and the coder.
+
+  Styling:
+  - External CSS file (index.css) is linked for styling the QR code component layout and design.
+  - Google Fonts (Outfit) is used for typography.
+
+  Accessibility:
+  - Language is set to Spanish (es).
+  - Alt text is provided for the QR code image.
+
+  SEO:
+  - Title tag is set for better search engine visibility.
+  - Favicon is included for brand recognition in browser tabs.
+
+  Note: This HTML structure is designed to be responsive and accessible, following best practices for modern web development.
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- displays site properly based on user's device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Estilos para la pagina -->
+    <link rel="stylesheet" href="index.css" />
+
+    <!-- Enlaces para obtener la font family adecuada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Enlace para el icono de la pestaña modo claro -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32-dark.png"
+    />
+
+    <!-- Enlace para el icono de la pestaña modo oscuro -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <title>Frontend Mentor | QR code component</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Challenge 1 | <span class="title-gradient"> QR page </span></h1>
+    </header>
+    <!-- Seccion principal en la que colocar todo el contendio de la pagina -->
+    <main class="qr-code-container">
+      <div class="qr-code-back-box">
+        <!-- Cuadro en el que colocar el codigo QR -->
+        <section>
+          <!-- Your QR code will be displayed here -->
+          <img src="images/image-qr-code.png" alt="QR code" class="qr-code" />
+        </section>
+
+        <section>
+          <p class="qr-hook-frase">
+            Descubre un desarrollador junior apasionado por el front-end
+          </p>
+          <p class="qr-description">
+            Escanea el QR en pantalla para visitar mi Github y saber más de mi
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer de la página para considerar las atribuciones de autoría -->
+    <footer>
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="https://github.com/Euskindar">Euskindar</a>.
+      </div>
+    </footer>
+  </body>
+</html>
