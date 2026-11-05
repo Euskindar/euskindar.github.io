@@ -243,12 +243,56 @@ html[data-lang='en'] [data-lang-text='es'] {
 
 /* Escenario */
 .stage {
+  position: relative;
   flex: 1;
   display: grid;
   grid-template-columns: minmax(150px, 200px) minmax(0, 1fr);
   gap: clamp(2rem, 6vw, 5rem);
   align-items: center;
   padding-block: clamp(2.75rem, 9vh, 5.5rem);
+}
+
+.stage > .rail,
+.stage > .lede-block {
+  position: relative;
+  z-index: 1;
+}
+
+/* Grúa decorativa: dibujo técnico, sin competir con el texto */
+.blueprint {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: min(34vw, 470px, 46vh);
+  height: auto;
+  color: #d3d1c9;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linecap: square;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 20%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 20%);
+}
+
+.blueprint__lattice {
+  stroke-opacity: 0.72;
+}
+
+.blueprint__tie {
+  stroke-dasharray: 2 4;
+  stroke-opacity: 0.75;
+}
+
+.blueprint__load {
+  transform-box: view-box;
+  transform-origin: 150px 88px;
+  animation: sway 13s ease-in-out infinite alternate;
+}
+
+.blueprint__load-beam {
+  stroke: var(--blue);
+  stroke-opacity: 0.5;
 }
 
 /* Hoja de ruta en forma de grafo */
@@ -496,7 +540,21 @@ html[data-lang='en'] [data-lang-text='es'] {
   }
 }
 
+@keyframes sway {
+  from {
+    transform: rotate(-0.7deg);
+  }
+  to {
+    transform: rotate(0.7deg);
+  }
+}
+
 /* Móvil y tablet */
+@media (max-width: 900px) {
+  .blueprint {
+    display: none;
+  }
+}
 @media (max-width: 780px) {
   .stage {
     grid-template-columns: minmax(0, 1fr);
