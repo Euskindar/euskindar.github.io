@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Euskindar">
+  <rect width="32" height="32" fill="#f7f6f2" />
+  <path d="M11 7v18" stroke="#d7d5cd" stroke-width="2" />
+  <circle cx="11" cy="9" r="3" fill="#2e7d5b" />
+  <circle cx="11" cy="16" r="3" fill="#2457d6" />
+  <circle cx="11" cy="23" r="3" fill="#d94f2b" />
+  <path d="M18 9h8M18 16h6M18 23h9" stroke="#111111" stroke-width="2" stroke-linecap="square" />
+</svg>
