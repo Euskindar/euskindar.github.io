@@ -1,56 +1,74 @@
 /* Tipografía autoalojada (SIL OFL). Sin peticiones a terceros. */
 @font-face {
-  font-family: 'Archivo';
+  font-family: "Archivo";
   font-style: normal;
   font-weight: 400 800;
   font-display: swap;
-  src: url('fonts/archivo-400-800-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  src: url("fonts/archivo-400-800-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 @font-face {
-  font-family: 'Archivo';
+  font-family: "Archivo";
   font-style: normal;
   font-weight: 400 800;
   font-display: swap;
-  src: url('fonts/archivo-400-800-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url("fonts/archivo-400-800-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: 'Azeret Mono';
+  font-family: "Azeret Mono";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('fonts/azeret-mono-400-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  src: url("fonts/azeret-mono-400-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 @font-face {
-  font-family: 'Azeret Mono';
+  font-family: "Azeret Mono";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('fonts/azeret-mono-400-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url("fonts/azeret-mono-400-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: 'Azeret Mono';
+  font-family: "Azeret Mono";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('fonts/azeret-mono-500-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  src: url("fonts/azeret-mono-500-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 @font-face {
-  font-family: 'Azeret Mono';
+  font-family: "Azeret Mono";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('fonts/azeret-mono-500-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url("fonts/azeret-mono-500-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
 }
 
 :root {
@@ -70,8 +88,10 @@
   --orange: #d94f2b;
   --orange-ink: #b03c1d;
 
-  --font-display: 'Archivo', 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
-  --font-mono: 'Azeret Mono', ui-monospace, 'SF Mono', 'Cascadia Mono', 'Segoe UI Mono', Menlo, monospace;
+  --font-display: "Archivo", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  --font-mono:
+    "Azeret Mono", ui-monospace, "SF Mono", "Cascadia Mono", "Segoe UI Mono",
+    Menlo, monospace;
 }
 
 *,
@@ -111,8 +131,8 @@ a {
 }
 
 /* Traducción por CSS: el JS solo mueve data-lang en <html>. */
-html[data-lang='es'] [data-lang-text='en'],
-html[data-lang='en'] [data-lang-text='es'] {
+html[data-lang="es"] [data-lang-text="en"],
+html[data-lang="en"] [data-lang-text="es"] {
   display: none;
 }
 
@@ -236,7 +256,7 @@ html[data-lang='en'] [data-lang-text='es'] {
   color: var(--ink);
 }
 
-.lang__btn[aria-pressed='true'] {
+.lang__btn[aria-pressed="true"] {
   background: var(--ink);
   color: var(--paper);
 }
@@ -271,26 +291,31 @@ html[data-lang='en'] [data-lang-text='es'] {
   stroke-width: 3;
   stroke-linecap: square;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 20%, #000 36%);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 20%,
+    #000 36%
+  );
   mask-image: linear-gradient(90deg, transparent 0%, transparent 20%, #000 36%);
 }
 
-.blueprint [data-bp='jibLattice'] {
+.blueprint [data-bp="jibLattice"] {
   fill: url(#bp-jib-lattice);
   stroke: none;
 }
 
-.blueprint [data-bp='mastLattice'] {
+.blueprint [data-bp="mastLattice"] {
   fill: url(#bp-mast-lattice);
   stroke: none;
 }
 
 /* Piezas macizas: rellenas de papel para que las líneas de detrás no las crucen */
-.blueprint [data-bp='counterWeight'],
-.blueprint [data-bp='trolley'],
-.blueprint [data-bp='hook'],
-.blueprint [data-bp='clampLeft'],
-.blueprint [data-bp='clampRight'] {
+.blueprint [data-bp="counterWeight"],
+.blueprint [data-bp="trolley"],
+.blueprint [data-bp="hook"],
+.blueprint [data-bp="clampLeft"],
+.blueprint [data-bp="clampRight"] {
   fill: var(--paper);
   stroke: currentColor;
 }
@@ -312,7 +337,7 @@ html[data-lang='en'] [data-lang-text='es'] {
 .bp-load {
   transform-box: view-box;
   transform-origin: var(--bp-sway-x, 50%) var(--bp-sway-y, 0px);
-  animation: sway 11s ease-in-out infinite alternate;
+  animation: sway 8s ease-in-out infinite alternate;
 }
 
 /* Hoja de ruta en forma de grafo */
@@ -325,7 +350,7 @@ html[data-lang='en'] [data-lang-text='es'] {
 }
 
 .rail::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0.6rem;
   bottom: 0.6rem;
@@ -451,7 +476,7 @@ html[data-lang='en'] [data-lang-text='es'] {
   letter-spacing: -0.035em;
   text-wrap: balance;
   transform-origin: var(--bp-sway-tx, 50%) var(--bp-sway-ty, 50%);
-  animation: sway 11s ease-in-out infinite alternate;
+  animation: sway 8s ease-in-out infinite alternate;
 }
 
 .lede {
@@ -571,8 +596,16 @@ html[data-lang='en'] [data-lang-text='es'] {
 @media (max-width: 900px) {
   .blueprint {
     opacity: 0.42;
-    -webkit-mask-image: radial-gradient(130% 130% at 100% 0%, #000 30%, transparent 72%);
-    mask-image: radial-gradient(130% 130% at 100% 0%, #000 30%, transparent 72%);
+    -webkit-mask-image: radial-gradient(
+      130% 130% at 100% 0%,
+      #000 30%,
+      transparent 72%
+    );
+    mask-image: radial-gradient(
+      130% 130% at 100% 0%,
+      #000 30%,
+      transparent 72%
+    );
   }
 }
 @media (max-width: 780px) {
