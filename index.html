@@ -331,19 +331,34 @@
           line(part('tieLeft'), apexX, apexY, jibLeft + (apexX - jibLeft) * 0.35, topY);
           line(part('tieRight'), apexX, apexY, width - 26, topY);
 
-          // Carga: el titular. El cable baja del carro hasta un eslingado que
-          // toma el texto por sus esquinas superiores, con manos de sujeción.
+          // Carga: el titular. El aparejo se ancla a la primera línea real del
+          // texto (no al rectángulo del bloque), para que las manos agarren letras
+          // también cuando el titular ocupa dos líneas.
           var sRect = stage.getBoundingClientRect();
           var tRect = title.getBoundingClientRect();
-          var cx = Math.round(tRect.left - sRect.left + tRect.width / 2);
-          var ty = Math.round(tRect.top - sRect.top);
+          var lang = document.documentElement.dataset.lang || 'es';
+          var spans = title.querySelectorAll('[data-lang-text]');
+          var span = null;
+          for (var i = 0; i < spans.length; i++) {
+            if (spans[i].dataset.langText === lang && spans[i].offsetParent !== null) {
+              span = spans[i];
+              break;
+            }
+          }
+          if (!span) return;
+
+          var lineRect = span.getClientRects()[0];
+          if (!lineRect) return;
+
+          var cx = Math.round(lineRect.left - sRect.left + lineRect.width / 2);
+          var ty = Math.round(lineRect.top - sRect.top);
           cx = Math.max(jibLeft + 14, Math.min(cx, mastLeft - 30));
 
           var maxSpread = mastLeft - 34 - cx; // el eslingado no cruza el mástil
-          var spread = Math.max(140, Math.min(tRect.width * 0.72, maxSpread));
+          var spread = Math.max(140, Math.min(lineRect.width * 0.72, maxSpread));
           var spreaderY = ty - 18;
-          var exLeft = tRect.left - sRect.left + tRect.width * 0.16;
-          var exRight = tRect.left - sRect.left + tRect.width * 0.84;
+          var exLeft = lineRect.left - sRect.left + lineRect.width * 0.16;
+          var exRight = lineRect.left - sRect.left + lineRect.width * 0.84;
 
           box(part('trolley'), cx - 10, botY - 3, 20, 17);
           line(part('cable'), cx, botY + 14, cx, spreaderY);

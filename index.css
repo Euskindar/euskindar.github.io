@@ -567,10 +567,12 @@ html[data-lang='en'] [data-lang-text='es'] {
   }
 }
 
-/* Móvil y tablet */
+/* Móvil y tablet: la grúa no desaparece; se vuelve fondo, con más fundido y menos tinta */
 @media (max-width: 900px) {
   .blueprint {
-    display: none;
+    opacity: 0.42;
+    -webkit-mask-image: radial-gradient(130% 130% at 100% 0%, #000 30%, transparent 72%);
+    mask-image: radial-gradient(130% 130% at 100% 0%, #000 30%, transparent 72%);
   }
 }
 @media (max-width: 780px) {
