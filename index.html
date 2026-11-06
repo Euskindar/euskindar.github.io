@@ -12,26 +12,44 @@
     <meta name="theme-color" content="#f7f6f2" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Euskindar — portfolio en construcción" />
-    <meta property="og:description" content="Portfolio en construcción. El buzón ya está abierto." />
+    <meta
+      property="og:description"
+      content="Portfolio en construcción. El buzón ya está abierto."
+    />
     <meta property="og:url" content="https://euskindar.github.io/" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="preload" href="fonts/archivo-400-800-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="fonts/azeret-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="fonts/archivo-400-800-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/azeret-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="stylesheet" href="index.css" />
     <script>
       // Idioma antes del primer pintado: ?lang=xx > localStorage > navegador > es
       (function () {
-        var param = new URLSearchParams(location.search).get('lang');
+        var param = new URLSearchParams(location.search).get("lang");
         var saved = null;
         try {
-          saved = localStorage.getItem('euskindar-lang');
+          saved = localStorage.getItem("euskindar-lang");
         } catch (error) {
           saved = null;
         }
         var valid = function (value) {
-          return value === 'es' || value === 'en';
+          return value === "es" || value === "en";
         };
-        var browser = (navigator.language || 'es').toLowerCase().indexOf('en') === 0 ? 'en' : 'es';
+        var browser =
+          (navigator.language || "es").toLowerCase().indexOf("en") === 0
+            ? "en"
+            : "es";
         var lang = valid(param) ? param : valid(saved) ? saved : browser;
         document.documentElement.lang = lang;
         document.documentElement.dataset.lang = lang;
@@ -61,8 +79,22 @@
           </span>
 
           <div class="lang" role="group" aria-label="Idioma / Language">
-            <button class="lang__btn" type="button" data-lang-btn="es" aria-pressed="true">ES</button>
-            <button class="lang__btn" type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+            <button
+              class="lang__btn"
+              type="button"
+              data-lang-btn="es"
+              aria-pressed="true"
+            >
+              ES
+            </button>
+            <button
+              class="lang__btn"
+              type="button"
+              data-lang-btn="en"
+              aria-pressed="false"
+            >
+              EN
+            </button>
           </div>
         </div>
       </header>
@@ -96,15 +128,15 @@
               <span data-lang-text="en">building</span>
             </span>
           </li>
-          <li class="rail__item">
+          <li class="rail__item rail__item--done">
             <span class="rail__dot" aria-hidden="true"></span>
             <span class="rail__label">
               <span data-lang-text="es">contacto</span>
               <span data-lang-text="en">contact</span>
             </span>
             <span class="rail__state">
-              <span data-lang-text="es">pendiente</span>
-              <span data-lang-text="en">pending</span>
+              <span data-lang-text="es">hecho</span>
+              <span data-lang-text="en">done</span>
             </span>
           </li>
         </ol>
@@ -117,12 +149,12 @@
 
           <p class="lede">
             <span data-lang-text="es">
-              Estoy montando el portfolio: proyectos, experiencia y código. Mientras tanto, el
-              buzón ya está abierto.
+              Estoy montando el portfolio: proyectos, experiencia y código.
+              Mientras tanto, el buzón ya está abierto.
             </span>
             <span data-lang-text="en">
-              I'm building the portfolio: projects, experience and code. The inbox is open in the
-              meantime.
+              I'm building the portfolio: projects, experience and code. The
+              inbox is open in the meantime.
             </span>
           </p>
 
@@ -137,7 +169,11 @@
               <span data-lang-text="en">Write to me</span>
               <span class="btn__arrow" aria-hidden="true">→</span>
             </a>
-            <a class="btn" href="https://github.com/Euskindar" rel="me noopener">
+            <a
+              class="btn"
+              href="https://github.com/Euskindar"
+              rel="me noopener"
+            >
               GitHub
               <span class="btn__arrow" aria-hidden="true">↗</span>
             </a>
@@ -152,12 +188,28 @@
           </p>
         </div>
 
-        <svg class="blueprint" viewBox="0 0 100 100" fill="none" aria-hidden="true" focusable="false">
+        <svg
+          class="blueprint"
+          viewBox="0 0 100 100"
+          fill="none"
+          aria-hidden="true"
+          focusable="false"
+        >
           <defs>
-            <pattern id="bp-jib-lattice" width="44" height="20" patternUnits="userSpaceOnUse">
+            <pattern
+              id="bp-jib-lattice"
+              width="44"
+              height="20"
+              patternUnits="userSpaceOnUse"
+            >
               <path class="bp-lattice-line" d="M0 20 L22 0 L44 20" />
             </pattern>
-            <pattern id="bp-mast-lattice" width="26" height="44" patternUnits="userSpaceOnUse">
+            <pattern
+              id="bp-mast-lattice"
+              width="26"
+              height="44"
+              patternUnits="userSpaceOnUse"
+            >
               <path class="bp-lattice-line" d="M0 0 L26 22 L0 44" />
             </pattern>
           </defs>
@@ -200,12 +252,13 @@
       <footer class="foot">
         <p class="foot__meta">Euskindar · 2026</p>
         <p class="foot__meta">
-          <span data-lang-text="es">Página provisional, sin fecha de publicación.</span>
+          <span data-lang-text="es"
+            >Página provisional, sin fecha de publicación.</span
+          >
           <span data-lang-text="en">Holding page, no release date yet.</span>
         </p>
       </footer>
     </div>
-
 
     <script src="js/lang.js"></script>
     <script src="js/crane.js"></script>
