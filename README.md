@@ -39,6 +39,9 @@ GitHub Pages está configurado en `main` / raíz con HTTPS forzado, así que el 
 ├── index.html
 ├── index.css
 ├── favicon.svg
+├── js/
+│   ├── lang.js          # conmutador ES/EN (localStorage y ?lang=)
+│   └── crane.js         # geometría de la grúa y del titular suspendido
 ├── fonts/
 │   ├── archivo-400-800-latin{,-ext}.woff2
 │   └── azeret-mono-{400,500}-latin{,-ext}.woff2
