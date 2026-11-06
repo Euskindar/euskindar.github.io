@@ -268,7 +268,7 @@ html[data-lang='en'] [data-lang-text='es'] {
   height: 100%;
   color: #b3b0a4;
   stroke: currentColor;
-  stroke-width: 1.4;
+  stroke-width: 3;
   stroke-linecap: square;
   pointer-events: none;
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 20%, #000 36%);
@@ -297,7 +297,7 @@ html[data-lang='en'] [data-lang-text='es'] {
 
 .bp-lattice-line {
   stroke: currentColor;
-  stroke-width: 1;
+  stroke-width: 1.8;
   stroke-opacity: 0.85;
 }
 
@@ -307,11 +307,12 @@ html[data-lang='en'] [data-lang-text='es'] {
   stroke-opacity: 0.9;
 }
 
-/* La carga (el titular suspendido) oscila desde el punto del carro */
+/* La carga (el titular suspendido) oscila desde el punto del carro.
+   El titular comparte el mismo péndulo: pivota sobre el mundo, no sobre sí mismo. */
 .bp-load {
   transform-box: view-box;
   transform-origin: var(--bp-sway-x, 50%) var(--bp-sway-y, 0px);
-  animation: sway 13s ease-in-out infinite alternate;
+  animation: sway 11s ease-in-out infinite alternate;
 }
 
 /* Hoja de ruta en forma de grafo */
@@ -449,6 +450,8 @@ html[data-lang='en'] [data-lang-text='es'] {
   line-height: 0.94;
   letter-spacing: -0.035em;
   text-wrap: balance;
+  transform-origin: var(--bp-sway-tx, 50%) var(--bp-sway-ty, 50%);
+  animation: sway 11s ease-in-out infinite alternate;
 }
 
 .lede {
@@ -557,10 +560,10 @@ html[data-lang='en'] [data-lang-text='es'] {
 
 @keyframes sway {
   from {
-    transform: rotate(-0.7deg);
+    transform: rotate(-2deg);
   }
   to {
-    transform: rotate(0.7deg);
+    transform: rotate(2deg);
   }
 }
 

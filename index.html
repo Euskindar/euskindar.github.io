@@ -154,11 +154,11 @@
 
         <svg class="blueprint" viewBox="0 0 100 100" fill="none" aria-hidden="true" focusable="false">
           <defs>
-            <pattern id="bp-jib-lattice" width="34" height="16" patternUnits="userSpaceOnUse">
-              <path class="bp-lattice-line" d="M0 16 L17 0 L34 16" />
+            <pattern id="bp-jib-lattice" width="44" height="20" patternUnits="userSpaceOnUse">
+              <path class="bp-lattice-line" d="M0 20 L22 0 L44 20" />
             </pattern>
-            <pattern id="bp-mast-lattice" width="18" height="34" patternUnits="userSpaceOnUse">
-              <path class="bp-lattice-line" d="M0 0 L18 17 L0 34" />
+            <pattern id="bp-mast-lattice" width="26" height="44" patternUnits="userSpaceOnUse">
+              <path class="bp-lattice-line" d="M0 0 L26 22 L0 44" />
             </pattern>
           </defs>
 
@@ -298,19 +298,19 @@
           svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
 
           var ground = height - 1;
-          var chord = 16; // altura entre cordones de la pluma
+          var chord = 20; // altura entre cordones de la pluma
           var topY = Math.round(height * 0.12);
           var botY = topY + chord;
           var mastRight = width - 44;
-          var mastLeft = mastRight - 18;
+          var mastLeft = mastRight - 26;
           var apexX = (mastLeft + mastRight) / 2;
-          var apexY = topY - 26;
+          var apexY = topY - 30;
 
           // Mástil sobre el lateral derecho
           line(part('mastLeft'), mastLeft, topY, mastLeft, ground);
           line(part('mastRight'), mastRight, topY, mastRight, ground);
-          line(part('mastBase'), mastLeft - 9, ground, mastRight + 9, ground);
-          box(part('mastLattice'), mastLeft, topY, 18, ground - topY);
+          line(part('mastBase'), mastLeft - 12, ground, mastRight + 12, ground);
+          box(part('mastLattice'), mastLeft, topY, 26, ground - topY);
 
           // Pluma: cruza hacia el centro; de su carro cuelga la carga
           var jibLeft = Math.round(width * 0.28);
@@ -321,7 +321,7 @@
           // Contrapeso corto, cerrado hacia el borde de la página
           line(part('counterTop'), mastRight, topY, width - 6, topY);
           line(part('counterBottom'), mastRight, botY, width - 10, botY);
-          box(part('counterWeight'), width - 34, topY, 28, 22);
+          box(part('counterWeight'), width - 36, topY, 30, 24);
 
           // Puntal sobre el mástil y tirantes a pluma y contrapeso
           part('pinnacle').setAttribute(
@@ -339,24 +339,26 @@
           var ty = Math.round(tRect.top - sRect.top);
           cx = Math.max(jibLeft + 14, Math.min(cx, mastLeft - 30));
 
-          var maxSpread = mastLeft - 30 - cx; // el eslingado no cruza el mástil
-          var spread = Math.max(120, Math.min(tRect.width * 0.72, maxSpread));
-          var spreaderY = ty - 16;
+          var maxSpread = mastLeft - 34 - cx; // el eslingado no cruza el mástil
+          var spread = Math.max(140, Math.min(tRect.width * 0.72, maxSpread));
+          var spreaderY = ty - 18;
           var exLeft = tRect.left - sRect.left + tRect.width * 0.16;
           var exRight = tRect.left - sRect.left + tRect.width * 0.84;
 
-          box(part('trolley'), cx - 7, botY - 3, 14, 13);
-          line(part('cable'), cx, botY + 10, cx, spreaderY);
-          box(part('hook'), cx - 4, spreaderY - 10, 8, 10);
+          box(part('trolley'), cx - 10, botY - 3, 20, 17);
+          line(part('cable'), cx, botY + 14, cx, spreaderY);
+          box(part('hook'), cx - 6, spreaderY - 12, 12, 12);
           line(part('spreader'), cx - spread / 2, spreaderY, cx + spread / 2, spreaderY);
-          line(part('slingLeft'), cx - spread / 2, spreaderY, exLeft, ty - 9);
-          line(part('slingRight'), cx + spread / 2, spreaderY, exRight, ty - 9);
-          box(part('clampLeft'), exLeft - 6, ty - 9, 12, 8);
-          box(part('clampRight'), exRight - 6, ty - 9, 12, 8);
+          line(part('slingLeft'), cx - spread / 2, spreaderY, exLeft, ty - 10);
+          line(part('slingRight'), cx + spread / 2, spreaderY, exRight, ty - 10);
+          box(part('clampLeft'), exLeft - 8, ty - 10, 16, 10);
+          box(part('clampRight'), exRight - 8, ty - 10, 16, 10);
 
-          // El balanceo pivota en el punto del carro
+          // El balanceo pivota en el punto del carro; el titular comparte péndulo
           svg.style.setProperty('--bp-sway-x', cx + 'px');
           svg.style.setProperty('--bp-sway-y', botY + 'px');
+          title.style.setProperty('--bp-sway-tx', (cx - (tRect.left - sRect.left)) + 'px');
+          title.style.setProperty('--bp-sway-ty', (botY - ty) + 'px');
         }
 
         if (typeof ResizeObserver !== 'undefined') {
