@@ -1,0 +1,9 @@
+{
+  "name": "euskindar.github.io",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Portfolio placeholder — bilingüe ES/EN con animación de grúa",
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
