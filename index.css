@@ -326,8 +326,8 @@ html[data-lang="en"] [data-lang-text="es"] {
   display: inline-flex;
   align-items: center;
   flex: none;
-  width: 42px;
-  height: 24px;
+  width: 50px;
+  height: 28px;
   padding: 2px;
   border: 1px solid var(--rule);
   background: var(--paper-sunk);
@@ -343,8 +343,8 @@ html[data-lang="en"] [data-lang-text="es"] {
 .switch__thumb {
   display: grid;
   place-items: center;
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   background: var(--ink);
   color: var(--paper);
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
@@ -353,7 +353,7 @@ html[data-lang="en"] [data-lang-text="es"] {
 .switch__face {
   grid-area: 1 / 1;
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   line-height: 1;
   letter-spacing: 0;
   transition: opacity 0.12s ease;
@@ -374,7 +374,7 @@ html[data-lang="en"] [data-lang-text="es"] {
 }
 
 .switch--theme .switch__face {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
 }
 
 /* Idioma: data-lang está siempre en <html>, también sin JS */
