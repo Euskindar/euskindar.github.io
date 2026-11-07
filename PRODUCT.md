@@ -24,8 +24,9 @@ Un visitante entiende que la página está en construcción y puede escribir o v
 
 ## Constraints
 
-- Estático: HTML, CSS y un script mínimo. Sin build, sin dependencias, sin peticiones a terceros.
+- Estático: HTML, CSS y scripts mínimos. Sin build, sin dependencias, sin peticiones a terceros.
 - Bilingüe ES/EN en la misma página, con conmutador persistente y `?lang=`.
+- Tema claro/oscuro con el mismo conmutador persistente y `?theme=`. Es un piloto: el sistema del portfolio sigue siendo solo papel hasta que se enmiende allí.
 - `noindex, nofollow` hasta la publicación del portfolio.
 - Fuentes autoalojadas (Archivo, Azeret Mono) con licencia SIL OFL.
 - Paleta y tipografía heredadas del sistema Commit Graph Ledger del portfolio.

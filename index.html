@@ -9,7 +9,16 @@
       content="El portfolio de Euskindar está en construcción. Mientras llega, el buzón ya está abierto."
     />
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="theme-color" content="#f7f6f2" />
+    <meta
+      name="theme-color"
+      content="#f7f6f2"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#161712"
+      media="(prefers-color-scheme: dark)"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Euskindar — portfolio en construcción" />
     <meta
@@ -33,28 +42,8 @@
       crossorigin
     />
     <link rel="stylesheet" href="index.css" />
-    <script>
-      // Idioma antes del primer pintado: ?lang=xx > localStorage > navegador > es
-      (function () {
-        var param = new URLSearchParams(location.search).get("lang");
-        var saved = null;
-        try {
-          saved = localStorage.getItem("euskindar-lang");
-        } catch (error) {
-          saved = null;
-        }
-        var valid = function (value) {
-          return value === "es" || value === "en";
-        };
-        var browser =
-          (navigator.language || "es").toLowerCase().indexOf("en") === 0
-            ? "en"
-            : "es";
-        var lang = valid(param) ? param : valid(saved) ? saved : browser;
-        document.documentElement.lang = lang;
-        document.documentElement.dataset.lang = lang;
-      })();
-    </script>
+    <!-- Idioma y tema antes del primer pintado (js/boot.js) -->
+    <script src="js/boot.js"></script>
   </head>
   <body>
     <a class="skip" href="#main">
@@ -77,6 +66,29 @@
             <span data-lang-text="es">en obra</span>
             <span data-lang-text="en">in progress</span>
           </span>
+
+          <div class="theme" role="group" aria-label="Tema / Theme">
+            <button
+              class="theme__btn"
+              type="button"
+              data-theme-btn="light"
+              aria-pressed="true"
+            >
+              <span class="theme__glyph" aria-hidden="true">☀</span>
+              <span class="sr-only" data-lang-text="es">Modo claro</span>
+              <span class="sr-only" data-lang-text="en">Light mode</span>
+            </button>
+            <button
+              class="theme__btn"
+              type="button"
+              data-theme-btn="dark"
+              aria-pressed="false"
+            >
+              <span class="theme__glyph" aria-hidden="true">☾</span>
+              <span class="sr-only" data-lang-text="es">Modo oscuro</span>
+              <span class="sr-only" data-lang-text="en">Dark mode</span>
+            </button>
+          </div>
 
           <div class="lang" role="group" aria-label="Idioma / Language">
             <button
@@ -261,6 +273,7 @@
     </div>
 
     <script src="js/lang.js"></script>
+    <script src="js/theme.js"></script>
     <script src="js/crane.js"></script>
   </body>
 </html>

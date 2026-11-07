@@ -72,6 +72,8 @@
 }
 
 :root {
+  color-scheme: light;
+
   --paper: #f7f6f2;
   --paper-sunk: #f2f0ea;
 
@@ -88,10 +90,72 @@
   --orange: #d94f2b;
   --orange-ink: #b03c1d;
 
+  /* Derivados: tinta sobre color sólido, hover y trazo del plano */
+  --on-accent: #ffffff;
+  --green-strong: #245f45;
+  --orange-line: #e8b5a6;
+  --blueprint: #b3b0a4;
+
   --font-display: "Archivo", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
   --font-mono:
     "Azeret Mono", ui-monospace, "SF Mono", "Cascadia Mono", "Segoe UI Mono",
     Menlo, monospace;
+}
+
+/* Estrato oscuro del mismo mundo: papel grafito, tinta cálida y acentos
+   aclarados para mantener AA sobre fondo oscuro.
+   Se declara dos veces: una para seguir al sistema sin JS y otra para el
+   override manual. Mantén ambos bloques sincronizados. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --paper: #161712;
+    --paper-sunk: #101109;
+
+    --ink: #f2f0ea;
+    --ink-dim: #c9c7bd;
+    --ink-soft: #a9a79d;
+    --ink-faint: #8b8980;
+
+    --rule: #33342c;
+    --rule-soft: #26271f;
+
+    --blue: #6f9bff;
+    --green: #4fbb8b;
+    --orange: #ff7a52;
+    --orange-ink: #ff9a78;
+
+    --on-accent: #0e0f0b;
+    --green-strong: #6acb9f;
+    --orange-line: #7a3a26;
+    --blueprint: #5c5e54;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #161712;
+  --paper-sunk: #101109;
+
+  --ink: #f2f0ea;
+  --ink-dim: #c9c7bd;
+  --ink-soft: #a9a79d;
+  --ink-faint: #8b8980;
+
+  --rule: #33342c;
+  --rule-soft: #26271f;
+
+  --blue: #6f9bff;
+  --green: #4fbb8b;
+  --orange: #ff7a52;
+  --orange-ink: #ff9a78;
+
+  --on-accent: #0e0f0b;
+  --green-strong: #6acb9f;
+  --orange-line: #7a3a26;
+  --blueprint: #5c5e54;
 }
 
 *,
@@ -103,6 +167,8 @@
 html,
 body {
   min-height: 100%;
+  /* Cubre el overscroll del canvas en móvil, que ignora el fondo de body */
+  background-color: var(--paper);
 }
 
 body {
@@ -118,12 +184,25 @@ body {
 
 ::selection {
   background: var(--blue);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 :focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
+}
+
+/* Texto solo para lectores de pantalla: da nombre accesible a los iconos */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 a {
@@ -196,7 +275,7 @@ html[data-lang="en"] [data-lang-text="es"] {
 .repo__tools {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
 .chip {
@@ -216,11 +295,11 @@ html[data-lang="en"] [data-lang-text="es"] {
 .chip--main {
   border-color: var(--blue);
   background: var(--blue);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .chip--wip {
-  border-color: #e8b5a6;
+  border-color: var(--orange-line);
   color: var(--orange-ink);
 }
 
@@ -231,13 +310,21 @@ html[data-lang="en"] [data-lang-text="es"] {
   background: var(--orange);
 }
 
-.lang {
+/* Conmutadores: idioma y tema comparten la forma de píldora segmentada */
+.lang,
+.theme {
   display: inline-flex;
-  margin-left: 0.35rem;
   border: 1px solid var(--rule);
 }
 
-.lang__btn {
+.lang__btn,
+.theme__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Objetivo táctil mínimo de WCAG 2.2 (24 × 24) */
+  min-width: 24px;
+  min-height: 24px;
   padding: 0.28rem 0.55rem;
   border: 0;
   background: transparent;
@@ -251,14 +338,22 @@ html[data-lang="en"] [data-lang-text="es"] {
     color 0.15s ease;
 }
 
-.lang__btn:hover {
+.lang__btn:hover,
+.theme__btn:hover {
   background: var(--paper-sunk);
   color: var(--ink);
 }
 
-.lang__btn[aria-pressed="true"] {
+.lang__btn[aria-pressed="true"],
+.theme__btn[aria-pressed="true"] {
   background: var(--ink);
   color: var(--paper);
+}
+
+.theme__glyph {
+  font-size: 0.9rem;
+  line-height: 1;
+  vertical-align: -0.06em;
 }
 
 /* Escenario */
@@ -286,7 +381,7 @@ html[data-lang="en"] [data-lang-text="es"] {
   z-index: 0;
   width: 100%;
   height: 100%;
-  color: #b3b0a4;
+  color: var(--blueprint);
   stroke: currentColor;
   stroke-width: 3;
   stroke-linecap: square;
@@ -521,13 +616,13 @@ html[data-lang="en"] [data-lang-text="es"] {
 .btn--contact {
   border-color: var(--green);
   background: var(--green);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .btn--contact:hover {
-  border-color: #245f45;
-  background: #245f45;
-  color: #fff;
+  border-color: var(--green-strong);
+  background: var(--green-strong);
+  color: var(--on-accent);
 }
 
 .btn__arrow {

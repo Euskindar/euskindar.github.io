@@ -7,6 +7,7 @@ Sitio estático, sin build ni dependencias: un `index.html`, un `index.css`, las
 ## Contenido
 
 - Mensaje bilingüe ES/EN con conmutador (`ES` / `EN`), persistido en `localStorage` y sobreescribible con `?lang=es` o `?lang=en`.
+- Tema claro/oscuro con conmutador (`☀` / `☾`). Por defecto sigue al sistema (`prefers-color-scheme`), se persiste en `localStorage` y se puede forzar con `?theme=light` o `?theme=dark`. Sin JS, el CSS sigue al sistema igualmente.
 - Hoja de ruta mínima en forma de grafo de commits: `init`, `contenido`, `portfolio`, `contacto`.
 - Acciones: email y GitHub. Sin fechas ni proyectos inventados.
 - `noindex, nofollow` hasta que llegue el portfolio real.
@@ -40,7 +41,9 @@ GitHub Pages está configurado en `main` / raíz con HTTPS forzado, así que el 
 ├── index.css
 ├── favicon.svg
 ├── js/
+│   ├── boot.js          # idioma y tema antes del primer pintado
 │   ├── lang.js          # conmutador ES/EN (localStorage y ?lang=)
+│   ├── theme.js         # conmutador claro/oscuro (localStorage y ?theme=)
 │   └── crane.js         # geometría de la grúa y del titular suspendido
 ├── fonts/
 │   ├── archivo-400-800-latin{,-ext}.woff2

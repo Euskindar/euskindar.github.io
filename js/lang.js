@@ -6,15 +6,23 @@
   var labels = {
     es: {
       group: 'Idioma',
+      theme: 'Tema',
       skip: 'Saltar al contenido',
       rail: 'Hoja de ruta'
     },
     en: {
       group: 'Language',
+      theme: 'Theme',
       skip: 'Skip to content',
       rail: 'Roadmap'
     }
   };
+
+  // Etiqueta el grupo solo si existe: evita romper el idioma si cambia el markup.
+  function label(selector, text) {
+    var node = document.querySelector(selector);
+    if (node) node.setAttribute('aria-label', text);
+  }
 
   function apply(lang) {
     root.lang = lang;
@@ -24,9 +32,10 @@
       button.setAttribute('aria-pressed', String(button.dataset.langBtn === lang));
     });
 
-    document.querySelector('.lang').setAttribute('aria-label', labels[lang].group);
-    document.querySelector('.skip').setAttribute('aria-label', labels[lang].skip);
-    document.querySelector('.rail').setAttribute('aria-label', labels[lang].rail);
+    label('.lang', labels[lang].group);
+    label('.theme', labels[lang].theme);
+    label('.skip', labels[lang].skip);
+    label('.rail', labels[lang].rail);
   }
 
   buttons.forEach(function (button) {
