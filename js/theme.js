@@ -1,11 +1,9 @@
-// Conmutador de tema: escribe data-theme en <html>, persiste la elección y
-// sincroniza aria-pressed y el meta theme-color. El pre-pintado vive en boot.js.
+// Conmutador de tema: un solo interruptor que alterna claro/oscuro.
+// El estado inicial lo resuelve js/boot.js antes del primer pintado.
 (function () {
   var root = document.documentElement;
-  var buttons = Array.prototype.slice.call(
-    document.querySelectorAll('[data-theme-btn]')
-  );
-  if (!buttons.length) return;
+  var toggle = document.querySelector('[data-theme-toggle]');
+  if (!toggle) return;
 
   var shared = window.EuskindarTheme || {};
   var key = shared.key || 'euskindar-theme';
@@ -13,13 +11,7 @@
 
   function apply(theme) {
     root.dataset.theme = theme;
-
-    buttons.forEach(function (button) {
-      button.setAttribute(
-        'aria-pressed',
-        String(button.dataset.themeBtn === theme)
-      );
-    });
+    toggle.setAttribute('aria-checked', String(theme === 'dark'));
 
     var metas = document.querySelectorAll('meta[name="theme-color"]');
     for (var i = 0; i < metas.length; i++) {
@@ -27,25 +19,23 @@
     }
   }
 
-  buttons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      var theme = button.dataset.themeBtn === 'dark' ? 'dark' : 'light';
-      apply(theme);
+  toggle.addEventListener('click', function () {
+    var theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    apply(theme);
 
-      try {
-        localStorage.setItem(key, theme);
-      } catch (error) {
-        /* almacenamiento bloqueado: el cambio sigue aplicándose en la sesión */
-      }
+    try {
+      localStorage.setItem(key, theme);
+    } catch (error) {
+      /* almacenamiento bloqueado: el cambio sigue aplicándose en la sesión */
+    }
 
-      try {
-        var url = new URL(window.location.href);
-        url.searchParams.set('theme', theme);
-        history.replaceState(null, '', url);
-      } catch (error) {
-        /* URL no disponible: se mantiene el estado en memoria */
-      }
-    });
+    try {
+      var url = new URL(window.location.href);
+      url.searchParams.set('theme', theme);
+      history.replaceState(null, '', url);
+    } catch (error) {
+      /* URL no disponible: se mantiene el estado en memoria */
+    }
   });
 
   apply(root.dataset.theme === 'dark' ? 'dark' : 'light');

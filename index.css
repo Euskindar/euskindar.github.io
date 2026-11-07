@@ -130,6 +130,11 @@
     --green-strong: #6acb9f;
     --orange-line: #7a3a26;
     --blueprint: #5c5e54;
+
+    /* Estado del conmutador de tema */
+    --switch-shift: 100%;
+    --face-light: 0;
+    --face-dark: 1;
   }
 }
 
@@ -156,6 +161,11 @@
   --green-strong: #6acb9f;
   --orange-line: #7a3a26;
   --blueprint: #5c5e54;
+
+  /* Estado del conmutador de tema */
+  --switch-shift: 100%;
+  --face-light: 0;
+  --face-dark: 1;
 }
 
 *,
@@ -310,50 +320,74 @@ html[data-lang="en"] [data-lang-text="es"] {
   background: var(--orange);
 }
 
-/* Conmutadores: idioma y tema comparten la forma de píldora segmentada */
-.lang,
-.theme {
-  display: inline-flex;
-  border: 1px solid var(--rule);
-}
-
-.lang__btn,
-.theme__btn {
+/* Conmutadores: un raíl único con el pulgar sobre el modo activo.
+   El pulgar mide la mitad del raíl interior, así que su recorrido es 100%. */
+.switch {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  /* Objetivo táctil mínimo de WCAG 2.2 (24 × 24) */
-  min-width: 24px;
-  min-height: 24px;
-  padding: 0.28rem 0.55rem;
-  border: 0;
-  background: transparent;
-  color: var(--ink-soft);
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease;
-}
-
-.lang__btn:hover,
-.theme__btn:hover {
+  flex: none;
+  width: 42px;
+  height: 24px;
+  padding: 2px;
+  border: 1px solid var(--rule);
   background: var(--paper-sunk);
-  color: var(--ink);
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
 }
 
-.lang__btn[aria-pressed="true"],
-.theme__btn[aria-pressed="true"] {
+.switch:hover {
+  border-color: var(--ink-faint);
+}
+
+.switch__thumb {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
   background: var(--ink);
   color: var(--paper);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.theme__glyph {
-  font-size: 0.9rem;
+.switch__face {
+  grid-area: 1 / 1;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
   line-height: 1;
-  vertical-align: -0.06em;
+  letter-spacing: 0;
+  transition: opacity 0.12s ease;
+}
+
+/* Tema: posición y cara salen de las mismas variables que el estrato oscuro,
+   así el estado sin JS también queda correcto. */
+.switch--theme .switch__thumb {
+  transform: translateX(var(--switch-shift, 0));
+}
+
+.switch--theme [data-face="light"] {
+  opacity: var(--face-light, 1);
+}
+
+.switch--theme [data-face="dark"] {
+  opacity: var(--face-dark, 0);
+}
+
+.switch--theme .switch__face {
+  font-size: 0.75rem;
+}
+
+/* Idioma: data-lang está siempre en <html>, también sin JS */
+html[data-lang="en"] .switch--lang .switch__thumb {
+  transform: translateX(100%);
+}
+
+html[data-lang="en"] .switch--lang [data-face="es"] {
+  opacity: 0;
+}
+
+html[data-lang="es"] .switch--lang [data-face="en"] {
+  opacity: 0;
 }
 
 /* Escenario */

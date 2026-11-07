@@ -67,47 +67,33 @@
             <span data-lang-text="en">in progress</span>
           </span>
 
-          <div class="theme" role="group" aria-label="Tema / Theme">
-            <button
-              class="theme__btn"
-              type="button"
-              data-theme-btn="light"
-              aria-pressed="true"
-            >
-              <span class="theme__glyph" aria-hidden="true">☀</span>
-              <span class="sr-only" data-lang-text="es">Modo claro</span>
-              <span class="sr-only" data-lang-text="en">Light mode</span>
-            </button>
-            <button
-              class="theme__btn"
-              type="button"
-              data-theme-btn="dark"
-              aria-pressed="false"
-            >
-              <span class="theme__glyph" aria-hidden="true">☾</span>
-              <span class="sr-only" data-lang-text="es">Modo oscuro</span>
-              <span class="sr-only" data-lang-text="en">Dark mode</span>
-            </button>
-          </div>
+          <button
+            class="switch switch--theme"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            data-theme-toggle
+          >
+            <span class="switch__thumb" aria-hidden="true">
+              <span class="switch__face" data-face="light">☀</span>
+              <span class="switch__face" data-face="dark">☾</span>
+            </span>
+            <span class="sr-only" data-lang-text="es">Modo oscuro</span>
+            <span class="sr-only" data-lang-text="en">Dark mode</span>
+          </button>
 
-          <div class="lang" role="group" aria-label="Idioma / Language">
-            <button
-              class="lang__btn"
-              type="button"
-              data-lang-btn="es"
-              aria-pressed="true"
-            >
-              ES
-            </button>
-            <button
-              class="lang__btn"
-              type="button"
-              data-lang-btn="en"
-              aria-pressed="false"
-            >
-              EN
-            </button>
-          </div>
+          <button
+            class="switch switch--lang"
+            type="button"
+            data-lang-toggle
+          >
+            <span class="switch__thumb" aria-hidden="true">
+              <span class="switch__face" data-face="es">ES</span>
+              <span class="switch__face" data-face="en">EN</span>
+            </span>
+            <span class="sr-only" data-lang-text="es">Cambiar a inglés</span>
+            <span class="sr-only" data-lang-text="en">Switch to Spanish</span>
+          </button>
         </div>
       </header>
 

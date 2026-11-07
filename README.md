@@ -6,8 +6,8 @@ Sitio estático, sin build ni dependencias: un `index.html`, un `index.css`, las
 
 ## Contenido
 
-- Mensaje bilingüe ES/EN con conmutador (`ES` / `EN`), persistido en `localStorage` y sobreescribible con `?lang=es` o `?lang=en`.
-- Tema claro/oscuro con conmutador (`☀` / `☾`). Por defecto sigue al sistema (`prefers-color-scheme`), se persiste en `localStorage` y se puede forzar con `?theme=light` o `?theme=dark`. Sin JS, el CSS sigue al sistema igualmente.
+- Mensaje bilingüe ES/EN con un interruptor deslizante que muestra solo el idioma activo (`ES` / `EN`), persistido en `localStorage` y sobreescribible con `?lang=es` o `?lang=en`.
+- Tema claro/oscuro con un interruptor deslizante que muestra solo el icono del modo activo (`☀` / `☾`). Por defecto sigue al sistema (`prefers-color-scheme`), se persiste en `localStorage` y se puede forzar con `?theme=light` o `?theme=dark`. Sin JS, el CSS sigue al sistema igualmente.
 - Hoja de ruta mínima en forma de grafo de commits: `init`, `contenido`, `portfolio`, `contacto`.
 - Acciones: email y GitHub. Sin fechas ni proyectos inventados.
 - `noindex, nofollow` hasta que llegue el portfolio real.
