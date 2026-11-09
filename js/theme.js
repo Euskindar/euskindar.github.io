@@ -28,14 +28,6 @@
     } catch (error) {
       /* almacenamiento bloqueado: el cambio sigue aplicándose en la sesión */
     }
-
-    try {
-      var url = new URL(window.location.href);
-      url.searchParams.set('theme', theme);
-      history.replaceState(null, '', url);
-    } catch (error) {
-      /* URL no disponible: se mantiene el estado en memoria */
-    }
   });
 
   apply(root.dataset.theme === 'dark' ? 'dark' : 'light');

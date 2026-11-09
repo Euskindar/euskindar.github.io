@@ -51,4 +51,12 @@
 
   // Estado compartido con js/theme.js: una sola fuente para clave y colores.
   window.EuskindarTheme = { key: 'euskindar-theme', colors: COLORS };
+
+  // La URL ya no debe mostrar ?lang= ni ?theme= tras aplicar el estado.
+  // Se borra el query‑string una sola vez; el valor persiste en localStorage.
+  try {
+    history.replaceState(null, '', window.location.pathname + window.location.hash);
+  } catch (error) {
+    /* history API no disponible: el estado sigue aplicado en memoria */
+  }
 })();
