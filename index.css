@@ -683,6 +683,23 @@ html[data-lang="es"] .switch--lang [data-face="en"] {
   color: var(--ink-faint);
 }
 
+/* Entrada de la grúa: sube como bloque y se revela de abajo a arriba,
+   igual que el resto del contenido. Sin animaciones por línea. */
+@keyframes crane-rise {
+  from {
+    transform: translateY(10px);
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.blueprint {
+  animation: crane-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
 @keyframes draw-y {
   from {
     transform: scaleY(0);
