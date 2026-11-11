@@ -7,7 +7,6 @@
   var title = document.querySelector('.title');
   if (!svg || !stage || !title) return;
 
-  var NS = 'http://www.w3.org/2000/svg';
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   var part = function (name) {
@@ -29,27 +28,6 @@
     el.setAttribute('width', w);
     el.setAttribute('height', h);
   };
-
-  // Anotación de vaivén: arco punteado con punta de flecha, en el trazo del plano.
-  var cue = document.createElementNS(NS, 'path');
-  cue.setAttribute('class', 'bp-cue');
-  cue.setAttribute('aria-hidden', 'true');
-  svg.appendChild(cue);
-
-  var cueDismissed = false;
-
-  function dismissCue() {
-    cueDismissed = true;
-    cue.classList.remove('is-visible');
-  }
-
-  function showCue() {
-    if (cueDismissed) return;
-    cue.classList.add('is-visible');
-    window.setTimeout(dismissCue, 6000);
-  }
-
-  window.setTimeout(showCue, 1200);
 
   function draw() {
     var width = stage.clientWidth;
@@ -129,31 +107,6 @@
     line(part('slingRight'), cx + spread / 2, spreaderY, exRight, ty - 10);
     box(part('clampLeft'), exLeft - 8, ty - 10, 16, 10);
     box(part('clampRight'), exRight - 8, ty - 10, 16, 10);
-
-    // Anotación: arco de vaivén por debajo de la carga, con punta de flecha.
-    var loadBottom = Math.max(ty, lineRect.bottom - sRect.top);
-    // Radio desde el pivote hasta un poco por debajo de la carga.
-    var cueRadius = Math.max(36, loadBottom - botY + 26);
-    var cueSpan = 0.28; // ±16°
-    var cueCenter = cx;
-    var cuePivot = botY;
-    var point = function (angle, radius) {
-      return [
-        cueCenter + radius * Math.sin(angle),
-        cuePivot + radius * Math.cos(angle),
-      ];
-    };
-    var start = point(-cueSpan, cueRadius);
-    var end = point(cueSpan, cueRadius);
-    var barbBack = point(cueSpan - 0.16, cueRadius - 7);
-    var barbFront = point(cueSpan - 0.16, cueRadius + 7);
-    cue.setAttribute(
-      'd',
-      'M' + start[0] + ' ' + start[1] +
-        ' A' + cueRadius + ' ' + cueRadius + ' 0 0 1 ' + end[0] + ' ' + end[1] +
-        ' M' + end[0] + ' ' + end[1] + ' L' + barbBack[0] + ' ' + barbBack[1] +
-        ' M' + end[0] + ' ' + end[1] + ' L' + barbFront[0] + ' ' + barbFront[1]
-    );
 
     // El balanceo pivota en el punto del carro; el titular comparte péndulo
     svg.style.setProperty('--bp-sway-x', cx + 'px');
@@ -285,8 +238,6 @@
       lastX = event.clientX;
       lastT = now;
       energy = Math.min(1, speed / 2);
-
-      dismissCue();
     },
     { passive: true }
   );

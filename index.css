@@ -133,8 +133,6 @@
 
     /* Estado del conmutador de tema */
     --switch-shift: 100%;
-    --face-light: 0;
-    --face-dark: 1;
   }
 }
 
@@ -164,8 +162,6 @@
 
   /* Estado del conmutador de tema */
   --switch-shift: 100%;
-  --face-light: 0;
-  --face-dark: 1;
 }
 
 *,
@@ -320,16 +316,17 @@ html[data-lang="en"] [data-lang-text="es"] {
   background: var(--orange);
 }
 
-/* Conmutadores: un raíl único con el pulgar sobre el modo activo.
-   El pulgar mide la mitad del raíl interior, así que su recorrido es 100%. */
+/* Conmutadores: raíl con las dos opciones visibles y un pulgar que marca la
+   activa. El pulgar mide la mitad del raíl interior, así que su recorrido es 100%. */
 .switch {
+  position: relative;
   display: inline-flex;
-  align-items: center;
   flex: none;
   width: 50px;
   height: 28px;
   padding: 2px;
   border: 1px solid var(--rule);
+  border-radius: 999px;
   background: var(--paper-sunk);
   appearance: none;
   cursor: pointer;
@@ -341,53 +338,93 @@ html[data-lang="en"] [data-lang-text="es"] {
 }
 
 .switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Cara inactiva: visible pero apagada, para que se sepa que hay otra opción. */
+.switch__face {
+  position: absolute;
+  top: 2px;
+  z-index: 1;
   display: grid;
   place-items: center;
   width: 22px;
   height: 22px;
-  background: var(--ink);
-  color: var(--paper);
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.switch__face {
-  grid-area: 1 / 1;
   font-family: var(--font-mono);
   font-size: 0.75rem;
   line-height: 1;
   letter-spacing: 0;
-  transition: opacity 0.12s ease;
+  color: var(--ink-dim);
+  opacity: 0.7;
+  transition: opacity 0.12s ease, color 0.12s ease;
 }
 
-/* Tema: posición y cara salen de las mismas variables que el estrato oscuro,
-   así el estado sin JS también queda correcto. */
-.switch--theme .switch__thumb {
-  transform: translateX(var(--switch-shift, 0));
+.switch__face[data-face="light"],
+.switch__face[data-face="es"] {
+  left: 2px;
 }
 
-.switch--theme [data-face="light"] {
-  opacity: var(--face-light, 1);
-}
-
-.switch--theme [data-face="dark"] {
-  opacity: var(--face-dark, 0);
+.switch__face[data-face="dark"],
+.switch__face[data-face="en"] {
+  left: 24px;
 }
 
 .switch--theme .switch__face {
   font-size: 0.875rem;
 }
 
-/* Idioma: data-lang está siempre en <html>, también sin JS */
+.switch--theme .switch__thumb {
+  transform: translateX(var(--switch-shift, 0));
+}
+
+.switch--theme [data-face="light"] {
+  opacity: 1;
+  color: var(--paper);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .switch--theme [data-face="light"] {
+    opacity: 0.55;
+    color: var(--ink-dim);
+  }
+
+  :root:not([data-theme="light"]) .switch--theme [data-face="dark"] {
+    opacity: 1;
+    color: var(--paper);
+  }
+}
+
+:root[data-theme="dark"] .switch--theme [data-face="light"] {
+  opacity: 0.55;
+  color: var(--ink-dim);
+}
+
+:root[data-theme="dark"] .switch--theme [data-face="dark"] {
+  opacity: 1;
+  color: var(--paper);
+}
+
+/* Idioma: data-lang está siempre en <html>, también sin JS. */
+.switch--lang .switch__thumb {
+  transform: translateX(0);
+}
+
 html[data-lang="en"] .switch--lang .switch__thumb {
   transform: translateX(100%);
 }
 
-html[data-lang="en"] .switch--lang [data-face="es"] {
-  opacity: 0;
-}
-
-html[data-lang="es"] .switch--lang [data-face="en"] {
-  opacity: 0;
+html[data-lang="es"] .switch--lang [data-face="es"],
+html[data-lang="en"] .switch--lang [data-face="en"] {
+  opacity: 1;
+  color: var(--paper);
 }
 
 /* Escenario */
@@ -459,24 +496,6 @@ html[data-lang="es"] .switch--lang [data-face="en"] {
   stroke: currentColor;
   stroke-dasharray: 2 5;
   stroke-opacity: 0.9;
-}
-
-/* Anotación fantasma: indica que el titular se mueve con el cursor.
-   Se dibuja como un arco de vaivén y se desvanece tras la primera interacción. */
-.bp-cue {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.2;
-  stroke-dasharray: 2 4;
-  stroke-opacity: 0.55;
-  filter: blur(0.4px);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.bp-cue.is-visible {
-  opacity: 1;
 }
 
 /* La carga (el titular suspendido) oscila desde el punto del carro.
