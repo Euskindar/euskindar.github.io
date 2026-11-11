@@ -1,10 +1,14 @@
-// Geometría de la grúa: se dibuja sobre el tamaño real del escenario y la
-// carga queda suspendida sobre el titular. Se recalcula si cambia el layout.
+// Geometría de la grúa y respuesta del péndulo al cursor.
+// La carga (el titular) se dibuja sobre el tamaño real del escenario y se
+// recalcula si cambia el layout.
 (function () {
   var svg = document.querySelector('.blueprint');
   var stage = document.querySelector('.stage');
   var title = document.querySelector('.title');
   if (!svg || !stage || !title) return;
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   var part = function (name) {
     return svg.querySelector('[data-bp="' + name + '"]');
@@ -25,6 +29,27 @@
     el.setAttribute('width', w);
     el.setAttribute('height', h);
   };
+
+  // Anotación de vaivén: arco punteado con punta de flecha, en el trazo del plano.
+  var cue = document.createElementNS(NS, 'path');
+  cue.setAttribute('class', 'bp-cue');
+  cue.setAttribute('aria-hidden', 'true');
+  svg.appendChild(cue);
+
+  var cueDismissed = false;
+
+  function dismissCue() {
+    cueDismissed = true;
+    cue.classList.remove('is-visible');
+  }
+
+  function showCue() {
+    if (cueDismissed) return;
+    cue.classList.add('is-visible');
+    window.setTimeout(dismissCue, 6000);
+  }
+
+  window.setTimeout(showCue, 1200);
 
   function draw() {
     var width = stage.clientWidth;
@@ -105,6 +130,31 @@
     box(part('clampLeft'), exLeft - 8, ty - 10, 16, 10);
     box(part('clampRight'), exRight - 8, ty - 10, 16, 10);
 
+    // Anotación: arco de vaivén por debajo de la carga, con punta de flecha.
+    var loadBottom = Math.max(ty, lineRect.bottom - sRect.top);
+    // Radio desde el pivote hasta un poco por debajo de la carga.
+    var cueRadius = Math.max(36, loadBottom - botY + 26);
+    var cueSpan = 0.28; // ±16°
+    var cueCenter = cx;
+    var cuePivot = botY;
+    var point = function (angle, radius) {
+      return [
+        cueCenter + radius * Math.sin(angle),
+        cuePivot + radius * Math.cos(angle),
+      ];
+    };
+    var start = point(-cueSpan, cueRadius);
+    var end = point(cueSpan, cueRadius);
+    var barbBack = point(cueSpan - 0.16, cueRadius - 7);
+    var barbFront = point(cueSpan - 0.16, cueRadius + 7);
+    cue.setAttribute(
+      'd',
+      'M' + start[0] + ' ' + start[1] +
+        ' A' + cueRadius + ' ' + cueRadius + ' 0 0 1 ' + end[0] + ' ' + end[1] +
+        ' M' + end[0] + ' ' + end[1] + ' L' + barbBack[0] + ' ' + barbBack[1] +
+        ' M' + end[0] + ' ' + end[1] + ' L' + barbFront[0] + ' ' + barbFront[1]
+    );
+
     // El balanceo pivota en el punto del carro; el titular comparte péndulo
     svg.style.setProperty('--bp-sway-x', cx + 'px');
     svg.style.setProperty('--bp-sway-y', botY + 'px');
@@ -124,4 +174,132 @@
 
   window.addEventListener('resize', draw);
   draw();
+
+  // Péndulo controlado por JS: vaivén continuo y repulsión del cursor.
+  // Sin JS la grúa no tiene geometría, así que no hay nada que degradar.
+  if (reduceMotion.matches) return;
+
+  var load = svg.querySelector('.bp-load');
+  if (!load) return;
+
+  var BASE_AMP = 2;
+  var MAX_BIAS = 4.5;
+  var PERIOD = 8; // segundos por ciclo completo
+  var amp = BASE_AMP;
+  var bias = 0;
+  var phase = 0;
+  var energy = 0;
+  var lastX = null;
+  var lastT = 0;
+  // Estado del imán: posición del cursor y centro del titular.
+  var near = false;
+  var pointerX = 0;
+  var pointerProximity = 0;
+  var centerX = 0;
+  var halfWidth = 1;
+  var lastFrame = 0;
+  var looping = false;
+
+  var clamp = function (value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  };
+
+  var frame = function (now) {
+    if (document.hidden) {
+      looping = false;
+      return;
+    }
+
+    if (!lastFrame) lastFrame = now;
+    var dt = Math.min(0.05, (now - lastFrame) / 1000);
+    lastFrame = now;
+
+    // El impulso del cursor se agota solo.
+    energy *= 0.94;
+
+    var targetAmp = BASE_AMP;
+    var targetBias = 0;
+    if (near) {
+      targetAmp = BASE_AMP + (0.6 + energy * 2.6) * pointerProximity;
+      // Imán: el péndulo se aparta del lado en el que está el cursor.
+      // Con el pivote encima, un ángulo positivo desplaza la carga a la
+      // izquierda; por eso el signo es directo (no negativo).
+      targetBias =
+        clamp((pointerX - centerX) / halfWidth, -1, 1) *
+        MAX_BIAS *
+        pointerProximity;
+    }
+
+    amp += (targetAmp - amp) * 0.12;
+    bias += (targetBias - bias) * 0.12;
+
+    phase += (dt * Math.PI * 2) / PERIOD;
+    var angle = amp * Math.sin(phase) + bias;
+    var transform = 'rotate(' + angle.toFixed(3) + 'deg)';
+    load.style.transform = transform;
+    title.style.transform = transform;
+
+    window.requestAnimationFrame(frame);
+  };
+
+  var startLoop = function () {
+    if (looping) return;
+    looping = true;
+    lastFrame = 0;
+    window.requestAnimationFrame(frame);
+  };
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      looping = false;
+    } else {
+      startLoop();
+    }
+  });
+
+  stage.addEventListener(
+    'pointermove',
+    function (event) {
+      var tr = title.getBoundingClientRect();
+      if (!tr.width) return;
+
+      // Distancia al rectángulo del titular: la interacción llega hasta 140px.
+      var dx = Math.max(tr.left - event.clientX, 0, event.clientX - tr.right);
+      var dy = Math.max(tr.top - event.clientY, 0, event.clientY - tr.bottom);
+      var proximity = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / 140);
+      if (!proximity) {
+        near = false;
+        lastX = null;
+        return;
+      }
+
+      near = true;
+      pointerX = event.clientX;
+      pointerProximity = proximity;
+      centerX = tr.left + tr.width / 2;
+      halfWidth = tr.width / 2 || 1;
+
+      var now = window.performance.now();
+      var speed =
+        lastX === null ? 0 : Math.abs(event.clientX - lastX) / Math.max(8, now - lastT);
+      lastX = event.clientX;
+      lastT = now;
+      energy = Math.min(1, speed / 2);
+
+      dismissCue();
+    },
+    { passive: true }
+  );
+
+  stage.addEventListener(
+    'pointerleave',
+    function () {
+      near = false;
+      lastX = null;
+      energy = 0;
+    },
+    { passive: true }
+  );
+
+  startLoop();
 })();

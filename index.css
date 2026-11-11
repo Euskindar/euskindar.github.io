@@ -461,12 +461,29 @@ html[data-lang="es"] .switch--lang [data-face="en"] {
   stroke-opacity: 0.9;
 }
 
+/* Anotación fantasma: indica que el titular se mueve con el cursor.
+   Se dibuja como un arco de vaivén y se desvanece tras la primera interacción. */
+.bp-cue {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-dasharray: 2 4;
+  stroke-opacity: 0.55;
+  filter: blur(0.4px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.bp-cue.is-visible {
+  opacity: 1;
+}
+
 /* La carga (el titular suspendido) oscila desde el punto del carro.
    El titular comparte el mismo péndulo: pivota sobre el mundo, no sobre sí mismo. */
 .bp-load {
   transform-box: view-box;
   transform-origin: var(--bp-sway-x, 50%) var(--bp-sway-y, 0px);
-  animation: sway 8s ease-in-out infinite alternate;
 }
 
 /* Hoja de ruta en forma de grafo */
@@ -605,7 +622,6 @@ html[data-lang="es"] .switch--lang [data-face="en"] {
   letter-spacing: -0.035em;
   text-wrap: balance;
   transform-origin: var(--bp-sway-tx, 50%) var(--bp-sway-ty, 50%);
-  animation: sway 8s ease-in-out infinite alternate;
 }
 
 .lede {
@@ -726,15 +742,6 @@ html[data-lang="es"] .switch--lang [data-face="en"] {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes sway {
-  from {
-    transform: rotate(-2deg);
-  }
-  to {
-    transform: rotate(2deg);
   }
 }
 
